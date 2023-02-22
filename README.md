@@ -37,9 +37,24 @@ If a download is requested, the client first receives an MD5 hash of the file fr
 of the file, that it downloaded, and verifies the integrity of the download by comparing the hashes. In the event the hashes do not match, meaning the file was corrupted somehow, the client will attempt to re-download the file
 a N number of times, with N being specified in the config file, or set to 3 by default. 
 
-##Installation/Set-Up
+## Installation/Set-Up
+
 To use the program(s), make sure you have g++ compiler installed, and that the program(s) are being executed in a linux environment. From the root directory of the project, type "make" into the terminal to compile the code and 
-generate the executable binaries. They will be named "server.o" and "client.o". 
+generate the executable binaries. They will be named "server.o" and "client.o".
+
+# Dependencies
+
+These programs utilize various C/C++ standard libraries, the most notable dependencies are:
+- 
+    - openssl: This library is used to calculate the MD5 hash of the downloaded file.
+    - iostream: This library is used for standard input/output operations.
+    - fstream: This library is used to read the client configuration file.
+    - cstring: This library is used for string operations.
+    - iomanip: This library is used for output formatting.
+    - netinet/in.h: This library is used for internet address structures.
+    - arpa/inet.h: This library is used for IP address conversion functions.
+    - sys/socket.h: This library is used for socket-related functions.
+    - unistd.h: This library is used for standard symbolic constants and types.
 
 ## Usage
 
