@@ -1,9 +1,13 @@
 # <File Server and Client program implementation in C++>
 
 [Description](#Description)
+
 [Installation/Set-Up](#Installation/Set-Up)
+
 [Usage](#Usage)
+
 [Evaluation](#Evaluation)
+
 [TL;DR](#TL;DR)
 
 ###NOTE!
