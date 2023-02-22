@@ -46,15 +46,18 @@ generate the executable binaries. They will be named "server.o" and "client.o".
 
 These programs utilize various C/C++ standard libraries, the most notable dependencies are:
 
-- openssl: This library is used to calculate the MD5 hash of the downloaded file.
-- iostream: This library is used for standard input/output operations.
+- openssl/evp: This library is used to calculate the MD5 hash of the downloaded file.
+- iostream,stdio: These libraries are used for standard input/output operations.
 - fstream: This library is used to read the client configuration file.
-- cstring: This library is used for string operations.
+- string,cstring: These libraries are used for string operations.
 - iomanip: This library is used for output formatting.
 - netinet/in.h: This library is used for internet address structures.
 - arpa/inet.h: This library is used for IP address conversion functions.
 - sys/socket.h: This library is used for socket-related functions.
+- pthread: This library is used for threading functionalities.
 - unistd.h: This library is used for standard symbolic constants and types.
+
+The full list of dependencies can be viewed in either "clientfiles/dependencies" or "serverfiles/dependencies"
 
 ## Usage
 

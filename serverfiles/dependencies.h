@@ -13,11 +13,9 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <pthread.h>
-#include <stdbool.h>
 #include <limits.h>
 #include <fstream>
 #include <vector>
 #include <ctime>
-#include <openssl/md5.h>
 #include <openssl/evp.h>
 #include "filetracker.h"
