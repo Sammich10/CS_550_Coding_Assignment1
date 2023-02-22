@@ -19,7 +19,7 @@ struct MessageHeader {
 
 typedef struct sockaddr SA;
 
-bool loadConfig(){
+bool loadConfig(){//function to load configuration parameters from config file
 	char real_path[PATH_MAX+1];
 	realpath(CONFIG_FILE_PATH,real_path);
 	ifstream in(real_path);
@@ -171,7 +171,7 @@ int downloadFile(char filename[]){
     char read_buffer[2048] ={0};
 
     int sock = sconnect(custom_port);
-
+    
     MessageHeader h;
     h.length = strlen(filename);
     send(sock, &h, sizeof(h), 0); //send message header
@@ -190,14 +190,15 @@ int downloadFile(char filename[]){
         close(sock);
         return -1;
     }
-    
-    if(strncmp(read_buffer, "File not found", strlen("File not found")) == 0){//if not, close connection and tell user
+    //if file not found, tell user
+    if(strncmp(read_buffer, "File not found", strlen("File not found")) == 0){
         printf("File not found: %s\n", filename);
         close(sock);
         return -1;
     }
 
-    char md5_hash_server[32]; 
+    char md5_hash_server[32];
+    //if file found, receive md5 hash 
     if(strncmp(read_buffer, "file found", strlen("file found")) == 0){
         //printf("File found! ");
         char buf[32];
@@ -282,7 +283,7 @@ void * t_downloadFile(void* p_filename){//attempt to download file in a thread, 
     return NULL;
 }
 
-
+//get the port and/or verify it is valid
 int getPort(){
     if(custom_port>0 && custom_port < 65535){
 		return custom_port;
@@ -292,7 +293,7 @@ int getPort(){
     return custom_port;
 
 }
-
+//check if the download directory exists, if not, create it
 void checkDownloadDirect(){
     struct stat st;
     char* d = new char[dl_folder.length()];
@@ -306,14 +307,14 @@ void checkDownloadDirect(){
         }
     }
 }
-
-void downloadSerial(vector<string>files_to_download){//download files in serial, attempt to download each file up to dl_attempts times
+//get the list of files to download from the server
+void downloadSerial(vector<string>files_to_download){//download files in serial
     for(int i = 0; (long unsigned int)i <files_to_download.size(); i++){
             string request = files_to_download[i];
             char *req = new char[request.length()];
             strcpy(req, request.c_str());
             int j = 0;
-            for(j=0; j < dl_attempts; j++){
+            for(j=0; j < dl_attempts; j++){//attempt to download file up to dl_attempts times
                 if(downloadFile(req) != 1) break;
                 printf("Reattempting download...\n");
             }
@@ -321,7 +322,7 @@ void downloadSerial(vector<string>files_to_download){//download files in serial,
         }
 }
 
-void downloadParallel(vector<string>files_to_download){
+void downloadParallel(vector<string>files_to_download){//download files in parallel, using threads
     pthread_t *t = new pthread_t[files_to_download.size()];
         for(int i = 0; (long unsigned int)i <files_to_download.size(); i++){
             string request = files_to_download[i]+'\n';
@@ -334,7 +335,7 @@ void downloadParallel(vector<string>files_to_download){
         }
 }
 
-void run_no_interact(char* argv[]){
+void run_no_interact(char* argv[]){//run the program in non-interactive mode
     char *ipv4, *port;
         char tlvbuf[80];
         strcpy(tlvbuf,argv[1]);
@@ -429,7 +430,8 @@ int main(int argc, char *argv[]){
         printf("%s\n",tokens);
         tokens = strtok(NULL," ,");
     }
-
+    
+    //check if user wants to download files in serial or parallel
     printf("would you like to receive the files in parallel or serially? (s/p): ");
     char a[5];
     cin.getline(a,5,'\n');
