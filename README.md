@@ -10,10 +10,10 @@
 
 [TL;DR](#TL;DR)
 
-###NOTE!
+### NOTE!
 To run the scripts included, you'll probably have to use "chmod +x script_name.sh"
 
-##Description
+## Description
 This project includes 2 separate but functionally related programs: 
 - a file server that can send files to clients
 
@@ -41,7 +41,7 @@ a N number of times, with N being specified in the config file, or set to 3 by d
 To use the program(s), make sure you have g++ compiler installed, and that the program(s) are being executed in a linux environment. From the root directory of the project, type "make" into the terminal to compile the code and 
 generate the executable binaries. They will be named "server.o" and "client.o". 
 
-##Usage
+## Usage
 
 You can start the server by typing "./server.o" into your terminal. There should be output indicating the config file was read successfully, and that the server is waiting for connections. The server will print out
 certain information indicating the number of bytes sent and the time it took to write them to the socket. The server has a directory in "serverfiles/files_in_server" containing sample files of varying sizes for testing
@@ -56,13 +56,13 @@ In addition, the client can be run using passed arguments from the command line.
     
     ./client.o IPADDRESS:PORT SERIAL/PARALLEL FILES DIRECTORY
     
-    For example:
+For example:
 
     ./client.o 127.0.0.1:8081 serial example1.txt,example2.txt,example3.txt ./downloads/
 
 It is important to note that both binaries must be executed in the projects "root" directory (i.e. the directory that the files are in, not the directories containing the source code)
 
-##Evaluation
+## Evaluation
 
 In addition, there are some scripts included that perform tests using the sample data in the "serverfiles/files_in_server" directory. These scripts are "clients_parallel.sh" and "clients_serial.sh" These scripts can be 
 run in two ways, either with no argument or with a single integer argument. The argument specifies the number of clients to create to try and download files from the server simultaneously. As their names indicate, one
@@ -75,7 +75,7 @@ those results into a simple to read comma-separated-value format, which is usefu
 There is also a "perform_all_tests.sh" script that will automatically run the previously described two scripts for 1,4,8,and 12 clients each. The results will be put into 
 
 
-##TL;DR
+## TL;DR
 
 Run "make" in the root directory to compile the source files. In one terminal, run the "./server.o" file (from the directory it is compiled into), do the same with "./client.o" in another terminal. This will run the program
 interactively. Follow the prompts.
